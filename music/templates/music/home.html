@@ -1,0 +1,47 @@
+{% extends 'music/master.html' %}
+{% block title %}
+Albums
+{% endblock %}
+{% load ratings %}
+
+{% block body %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div style="background: brown">
+    <h1 align="center" style="font-family: Calibri;font-weight: bold;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;background: brown;color: #ffd700;height: 25px;margin-top: 50px">ALBUMS</h1>
+    <h3 align="center" style="background: chartreuse;font-weight: bolder">STAY TUNED WITH ALL NEW PLAYLISTS!</h3>
+    </div>
+
+
+    <div class="container" style="margin-top: 40px">
+<div class="col-sm-14 col-md-16">
+    {% for item in album %}
+  <div class="col-sm-10 col-md-6 col-md-4">
+    <div class="thumbnail">
+      <img src="{{ item.image.url }}" style="width: 300px;height: 200px">
+      <div class="caption">
+        <h3>{{ item.title }}</h3>
+          <p><h5 style="font-weight: bolder;display: inline">Artist:</h5> {{ item.artist }}<br>
+          <h5 style="font-weight: bolder;display: inline">Genre:</h5> {{ item.genre }}<br>
+          <h5 style="font-weight: bolder;display: inline">Release Date:</h5> {{ item.year}} </p>
+          {% ratings item %}
+          <p><a href="{% url 'music:detail' item.id %}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></a></p>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+    </div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey" style="padding:20px">
+    <a href="#" class="w3-button w3-black"><i
+            class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+    <h2>iMudeo</h2>
+    <p>All your music and videos at one place<br>
+    Site developed and designed by iMudeo Corporation <br> © 2021 Automated Mudeo Private Limited</p>
+</footer>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends master %}
+{% block title %}
+{{ val.title }}
+{% endblock %}
+
+{% block body %}
+    <div class="media" align="center">
+  <div class="media-left media-middle" >
+      <div align="left"> <img class="media-object" src="{{ val.image.url }}" height="385px" width="550px" style="margin-bottom: 20px" alt="..."></div>
+     <div class="container mt-3 my-3" style="background: blueviolet;margin-bottom: 10px;" >
+      {% if user.is_authenticated %}
+          <a href="{% url 'music:addsong' val.id %}" style="background: white;margin-top: 10px;margin-bottom: 5px;color: coral" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true">ADD SONG</span></a>
+      {% endif %}
+
+
+
+    <div class="'media-body">
+
+    {% if val %}
+    <table class="table mt-3" style="background: white">
+        <tr align="center" style="font-weight: bold">
+            <td>Serial #</td>
+            <td>Song Title</td>
+            <td>Artist</td>
+            <td>Genre</td>
+            <td>Album Art</td>
+            <td>Action</td>
+            {% if user.is_authenticated %}
+                <td>Update</td>
+                <td>Delete</td>
+                {% endif %}
+        </tr>
+
+{% for i in val.song_set.all %}
+        <tr align="center">
+
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.title }}</td>
+            <td>{{ i.artist }}</td>
+            <td>{{ i.genre }}</td>
+            <td><img src="{{ i.image.url }}" height="50px" width="100px"></td>
+            <td><audio src="{{ i.sfile.url }}" controls="controls"></audio></td>
+        {% if user.is_authenticated %}
+            <td><a href="{% url 'music:updatesong' i.id %}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+            <td><a href="{% url 'music:deletesong' i.id %}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+        {% endif %}
+        </tr>
+
+        {% endfor %}
+    </table>
+        {% else %}
+        <h1 style="color: white">No songs to display</h1>
+
+    {% endif %}
+
+
+    </div>
+    </div>
+</div>
+  </div>
+{% endblock %}

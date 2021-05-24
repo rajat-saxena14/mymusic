@@ -1,0 +1,24 @@
+{% extends 'music/master.html' %}
+{% block title %}
+Register
+{% endblock %}
+{% block body %}
+<div align="center" style="margin-top: 180px;">
+    <form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    <div class="table-responsive">
+        <table style="background: rgba(215,252,5,0.39)">
+            {% for i in form %}
+                <tr>
+                <td style="color: white"><h3>{{ i.label_tag }}</h3></td>
+                <td>{{ i }}</td>
+                <td style="color: white">{{ i.help_text }}</td>
+                <td style="color: white">{{ i.errors }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+<input type="submit" value="REGISTER" style="background: rgba(80,255,214,0.53); margin-top: 10px;color: white;font-family:Calibri; font-size:x-large; font-weight: bolder;height:50px; width:200px">
+    </div>
+</form></div>
+
+{% endblock %}

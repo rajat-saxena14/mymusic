@@ -1,0 +1,178 @@
+{% extends 'music/master1.html' %}
+{% block title %}
+Albums
+{% endblock %}
+{% load ratings %}
+
+{% block body %}
+
+    <div style="background: brown">
+    <h1 align="center" style="font-family: Calibri;font-weight: bold;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;background: brown;color: #ffd700;height: 25px;margin-top: 50px">ALBUMS</h1>
+    <h3 align="center" style="background: chartreuse;font-weight: bolder">STAY TUNED WITH ALL NEW PLAYLISTS!</h3>
+    </div>
+
+    <div align="center">
+    <button class="button" onclick="window.location.href = '{% url 'music:login' %}';"><span> Unlock All the Premium Content<br> Hurry up! Buy Royal Pass Just at Rs. 999/mo! </span></button>
+    </div>
+    <style>
+.button {
+  border-radius: 4px;
+  background-color: #1e42f4;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 750px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+
+    <div class="container" style="margin-top: 40px">
+<div class="col-sm-14 col-md-16">
+    {% for item in album %}
+  <div class="col-sm-10 col-md-6 col-md-4">
+    <div class="thumbnail">
+      <img src="{{ item.image.url }}" style="width: 300px;height: 200px">
+      <div class="caption">
+        <h3 id="namepr{{ item.id }}">{{ item.title }}</h3>
+        <p><h5 style="font-weight: bolder;display: inline">Artist:</h5> {{ item.artist }}<br>
+          <h5 style="font-weight: bolder;display: inline">Genre:</h5> {{ item.genre }}<br>
+          <h5 style="font-weight: bolder;display: inline">Release Date:</h5> {{ item.year}} <br>
+          <h5 style="font-weight: bolder;display: inline">Price:</h5> For 3 days@Rs. <span id="pricepr{{ item.id }}">{{ item.price}}</span> Only!</p><br>
+          {% ratings item %}
+          <span id="divpr{{ item.id }}" class="divpr">
+              <button id="pr{{ item.id }}" class="btn btn-primary cart"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"> ADD TO CART </span></button>
+          </span>
+
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+    <script>
+    console.log('w');
+    if(localStorage.getItem('cart')==null){
+        var cart={};
+    }
+    else{
+        cart=JSON.parse(localStorage.getItem('cart'));
+        updateCart(cart);
+    }
+
+//$('.cart').click(function () {
+        //console.log('clicked');
+        $('.divpr').on('click', 'button.cart', function(){
+        var idstr=this.id.toString();
+        console.log(idstr);
+        if(cart[idstr]!=undefined){
+            qty=cart[idstr][0]+1;
+            cart[idstr]+=[qty, name, price];
+        }
+        else{
+            qty=1;
+            name=document.getElementById('name'+idstr).innerHTML;
+            price=document.getElementById('price'+idstr).innerHTML;
+            cart[idstr]=[qty, name, price];
+        }
+        console.log(cart);
+        updateCart(cart);
+    });
+
+
+//Add Popover to cart
+$('#popcart').popover();
+updatePopover(cart);
+
+updatePopover(cart);
+function  updatePopover() {
+    console.log('we are inside popover');
+    var popStr="";
+    popStr=popStr+"<h5>Cart for your items in bucket</h5><div class='mx-2 my-2'>";
+    var i=1;
+    for(var  item in cart){
+        popStr+="<b>"+ i+"</b>. ";
+        popStr=popStr+ document.getElementById('name'+item).innerHTML.slice(0,12) +"...Qty: "+cart[item][0]+'<br>';
+        i=i+1;
+    }
+    popStr=popStr+"</div><a href='{% url 'music:Checkout' %}'`><button class='btn btn-primary' id='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id='clearCart'>Clear Cart</button>    "
+    document.getElementById('popcart').setAttribute('data-content',popStr);
+    $('#popcart').popover('show');
+}
+
+function clearCart() {
+    cart= JSON.parse(localStorage.getItem('cart'));
+    for(var item in cart)
+    {
+        document.getElementById('div'+item).innerHTML='<button id="'+ item +'" class="btn btn-primary cart"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"> ADD TO CART </span></button>'
+    }
+    localStorage.clear();
+    cart={};
+    updateCart(cart);
+}
+
+
+function updateCart(cart) {
+    console.log('cart');
+    var sum=0;
+    for (var item in cart) {
+        sum+=cart[item][0];
+        document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>REMOVE FROM CART</button> <span id='val" + item + "''>";
+    }
+    localStorage.setItem('cart',JSON.stringify(cart));
+    document.getElementById('cart').innerHTML=Object.keys(cart).length;
+    updatePopover(cart);
+}
+
+$('.divpr').on("click", "button.minus", function() {
+   console.log("minus clicked");
+   a=this.id.slice(7, );
+   console.log(a);
+   cart['pr'+a][0]-=1;
+   cart['pr'+a][0]=Math.max(0, cart['pr'+a][0]);
+   if (cart['pr' + a][0] == 0){
+        document.getElementById('divpr' + a).innerHTML = '<button id="pr'+a+'" class="btn btn-primary cart"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"> ADD TO CART </span></button>';
+        delete cart['pr'+a];
+    }
+    else{
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+    }
+   updateCart(cart);
+});
+    </script>
+{% endblock %}
+
+
+

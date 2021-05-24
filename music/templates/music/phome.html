@@ -1,0 +1,76 @@
+{% extends 'music/master.html' %}
+{% block title %}
+Albums
+{% endblock %}
+{% load ratings %}
+
+{% block body %}
+
+    <div style="background: brown">
+    <h1 align="center" style="font-family: Calibri;font-weight: bold;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;background: brown;color: #ffd700;height: 25px;margin-top: 50px">ALBUMS</h1>
+    <h3 align="center" style="background: chartreuse;font-weight: bolder">STAY TUNED WITH ALL NEW PLAYLISTS!</h3>
+    </div>
+    <div align="center">
+        <button class="button" onclick="window.location.href = '{% url 'music:login' %}';"><span> Unlock All the Premium Content<br> Hurry up! Buy Royal Pass Just at Rs. 999/mo! </span></button>
+    </div>
+    <style>
+.button {
+  border-radius: 4px;
+  background-color: #1e42f4;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 750px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+    <div class="container" style="margin-top: 40px">
+<div class="col-sm-14 col-md-16">
+    {% for item in album %}
+  <div class="col-sm-10 col-md-6 col-md-4">
+    <div class="thumbnail">
+      <img src="{{ item.image.url }}" style="width: 300px;height: 200px">
+      <div class="caption">
+        <h3>{{ item.title }}</h3>
+          <p><h5 style="font-weight: bolder;display: inline">Artist:</h5> {{ item.artist }}<br>
+          <h5 style="font-weight: bolder;display: inline">Genre:</h5> {{ item.genre }}<br>
+          <h5 style="font-weight: bolder;display: inline">Release Date:</h5> {{ item.year}}<br>
+          <h5 style="font-weight: bolder;display: inline">Price:</h5> For 3 days@Rs. {{ item.price}} Only!</p>
+          {% ratings item %}
+          <p><a href="{% url 'music:login' %}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-play" aria-hidden="true"> Buy</span></a></p>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+    </div>
+{% endblock %}

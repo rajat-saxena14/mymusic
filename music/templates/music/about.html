@@ -1,0 +1,146 @@
+{% extends 'music/master.html' %}
+
+{% block title%}About Us{% endblock %}
+{% block body %}
+
+
+
+{% load static %}
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Automated Mudeo App!</h1>
+      <p>Automated Mudeo Pvt Ltd. is an online indian music and video website headquartered in Bengaluru, India. Founded by Rajat Saxena in 2020, the company initially focused on serving free online music and videos, before expanding into other product categories such as royal pass and premium subscription without advertisements.</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+            <div class="col-md-3">
+                <div class="card" style="width: 23rem;">
+            <div class="thumbnail">
+            <img src="{% static 'music/Picture1.jpg' %}" style="width: 300px;height: 250px">
+            <div class="caption">
+            <h3 class="name">RAJAT SAXENA</h3>
+            <button class="button" onclick="window.location.href = 'https://www.linkedin.com/in/rajat-saxena14';"><span>About</span></button>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 23rem;">
+            <div class="thumbnail">
+            <img src="{% static 'music/Picture2.jpg' %}" style="width: 300px;height: 250px">
+            <div class="caption">
+            <h3 class="name">RAUNAK KUMAR</h3>
+            <button class="button" onclick="window.location.href = 'https://www.linkedin.com/in/raunak-kumar-17b9801a1/';"><span>About</span></button>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 23rem;">
+            <div class="thumbnail">
+            <img src="{% static 'music/Picture3.jpg' %}" style="width: 300px;height: 250px">
+            <div class="caption">
+            <h3 class="name">ANKIT YADAV</h3>
+            <button class="button" onclick="window.location.href = 'https://www.linkedin.com/in/ankit-yadav27/';"><span>About</span></button>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 23rem;">
+            <div class="thumbnail">
+            <img src="{% static 'music/Picture4.jpg' %}" style="width: 300px;height: 250px">
+            <div class="caption">
+            <h3 class="name">SUMIT MAURYA</h3>
+            <button class="button" onclick="window.location.href = 'https://www.linkedin.com/in/sumit-kumar-maurya-b4b71b161/';"><span>About</span></button>
+            </div>
+            </div>
+            </div>
+            </div>
+
+
+    </div>
+
+<style>
+
+.name {
+  font-family: Blippo, fantasy;
+  font-size: 30px;
+  color: darkgreen;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fffb01, 0 0 40px #ffd500, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #7cff4d, 0 0 40px #82ff4d, 0 0 50px #4dff56, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+.button {
+  border-radius: 4px;
+  background-color: navy;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 19px;
+  padding: 20px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+  <div style="background: rgba(0,0,0,0.75)">
+    <h2 style="font-family: Bookman, URW Bookman L, serif; text-align: center; font-size: 50px; color: wheat;font-weight: bolder"><i class="glyphicon glyphicon-asterisk"></i> TEAM <i class="glyphicon glyphicon-asterisk"></i></h2>
+</div>
+    <hr>
+
+  </div> <!-- /container -->
+
+</main>
+
+
+
+
+
+
+
+
+{% endblock %}

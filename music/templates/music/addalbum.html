@@ -1,0 +1,25 @@
+{% extends 'music/master1.html' %}
+{% block title %}
+Addalbum
+{% endblock %}
+{% block body %}
+    <div align="center">
+<form method="post" enctype="multipart/form-data" style="margin-top: 180px;">
+{% csrf_token %}
+    <div class="table-responsive">
+        <table style="background: rgba(236,5,252,0.82);margin-bottom: 20px ">
+            {% for i in form %}
+                <tr>
+                <td style="color: white"><h3>{{ i.label_tag }}</h3></td>
+                <td>{{ i }}</td>
+                <td style="color: white">{{ i.help_text }}</td>
+                <td style="color: white">{{ i.errors }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    <input type="submit" value="ADD ALBUM" style="background: rgba(80,255,214,0.69); margin-top: 10px;color: white;font-family:Calibri; font-size:x-large; font-weight: bolder;height:50px; width:200px">
+    </div>
+
+</form>
+    </div>
+{% endblock %}

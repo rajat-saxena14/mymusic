@@ -1,0 +1,20 @@
+{% extends 'music/master1.html' %}
+{% block title %}
+Delete
+{% endblock %}
+{% block body %}
+    <div style="font-size:xx-large">
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<img src="{{ object.image.url }}" height="400px" width="400px">
+<h2 style="color: black;background: antiquewhite;font-size">{{ object.title }}</h2>
+<p>
+    <h3 style="color: black;background: yellow">Are you sure you want to delete it?</h3>
+    <input type="submit" value="Yes" class="btn btn-primary">
+    <a href="javascript:history.back()" class="btn btn-primary">No</a>
+
+</p>
+
+</form>
+    </div>
+{% endblock %}

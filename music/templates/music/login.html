@@ -1,0 +1,14 @@
+{% extends 'music/master.html' %}
+{% block title %}
+Login
+{% endblock %}
+{% block body %}
+    <div align="center" >
+<form method="post" enctype="multipart/form-data" style="font-size:x-large;background: rgba(245,245,246,0.39);margin-top: 180px" >
+{% csrf_token %}
+{{ form.as_p }}
+
+
+<input type="submit" value="LOGIN" style="background: rgba(80,255,214,0.75); margin-top: 50px;margin-bottom: 5px;color:black;font-family:Calibri; font-size:large; font-weight: bolder;height:50px; width:200px">
+</form></div>
+{% endblock %}
