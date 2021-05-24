@@ -1,4 +1,4 @@
-# mymusic.github.io
+# mymusic
 Django Music Webapp
 
 This is an ongoing under development project.
